@@ -13,7 +13,7 @@ class Header extends React.Component {
   render() {
     return (
       <div>
-        <A href="https://twitter.com/mxstbr">
+        <A href="http://tpc.hazelfire.net/">
           <Img src={Banner} alt="Programming Club - Logo" />
         </A>
       </div>

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -64,7 +65,12 @@ export class HomePage extends React.PureComponent {
         </Helmet>
         <div>
           <CenteredSection>
-            <Project>Vote your event ideas</Project>
+            <Project onClick={() => this.props.push('/polling')}>
+              Vote your event ideas
+            </Project>
+            <Project onClick={() => this.props.push('/feedback')}>
+              Give feedback for one of our events
+            </Project>
             <Project>Create your own profile page</Project>
           </CenteredSection>
         </div>
@@ -76,6 +82,7 @@ export class HomePage extends React.PureComponent {
 HomePage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  push: PropTypes.func,
   repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onSubmitForm: PropTypes.func,
   username: PropTypes.string,
@@ -89,6 +96,7 @@ export function mapDispatchToProps(dispatch) {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadRepos());
     },
+    push: target => dispatch(push(target)),
   };
 }
 
